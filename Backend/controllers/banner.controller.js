@@ -54,4 +54,3 @@ const deleteBanner = asyncHandler(async (req, res) => {
 });
 
 export { createBanner, getAllBanners, getSingleBanner, deleteBanner, };
-
