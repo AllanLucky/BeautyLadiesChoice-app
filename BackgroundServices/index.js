@@ -50,7 +50,7 @@ dbConnection()
       console.log(`Background services running on port ${PORT}`);
       scheduleServices(); // start all cron jobs after DB connection
     });
-  })
-  .catch((err) => {
-    console.error("Failed to connect to the database:", err.message);
-  });
+  })  
+    .catch((err) => {
+      console.error("Failed to connect to the database:", err.message);
+    });
