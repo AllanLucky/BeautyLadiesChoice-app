@@ -5,6 +5,7 @@ import MyAccount from "./pages/MyAccount"
 import Announcement from "./components/Announcement"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import Product from "./pages/Product"
 
 const Layout = () => {
   return (
@@ -33,6 +34,10 @@ function App() {
         {
           path: "/profile",
           element: <MyAccount />
+        },
+        {
+          path: "/product/:productId",
+          element: < Product/>
         }
       ]
     }
