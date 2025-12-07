@@ -2,7 +2,7 @@ import Typewriter from "typewriter-effect";
 
 const Announcement = () => {
   return (
-    <div className="bg-pink-500 flex items-center justify-center text-white text-[18px] font-semibold h-[30px] p-8 text-2xl">
+    <div className="bg-pink-400 flex items-center justify-center text-pink-100 text-[18px] font-semibold h-[30px] p-8 text-2xl">
       <Typewriter
         options={{
           strings: [
