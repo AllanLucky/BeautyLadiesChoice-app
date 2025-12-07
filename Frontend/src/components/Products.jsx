@@ -1,3 +1,5 @@
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+
 const products = [
   {
     id: 1,
@@ -13,7 +15,7 @@ const products = [
     price: 750,
     image: "/allan.webp",
     rating: 5,
-    description: "moisturizing lotion for soft skin.",
+    description: "Moisturizing lotion for soft skin.",
   },
   {
     id: 3,
@@ -33,18 +35,34 @@ const products = [
   },
 ];
 
+const StarRating = ({ rating, maxRating = 5 }) => {
+  const stars = [];
+
+  for (let i = 1; i <= maxRating; i++) {
+    if (i <= Math.floor(rating)) {
+      stars.push(<FaStar key={i} className="text-yellow-400" />);
+    } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+      stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+    } else {
+      stars.push(<FaRegStar key={i} className="text-yellow-400" />);
+    }
+  }
+
+  return <div className="flex space-x-1 justify-center mt-1">{stars}</div>;
+};
+
 const Products = () => {
   return (
-    <div className="flex flex-wrap mt-3 justify-center">
+    <div className="flex flex-wrap mt-3 justify-center mx-4">
       {products.map((product) => (
         <div
           key={product.id}
-          className="flex flex-col items-center justify-center h-50 m-6 cursor-pointer transform transition duration-500 hover:scale-105 hover:shadow-lg"
+          className="flex flex-col items-center justify-center h-auto m-3 cursor-pointer transform transition duration-500 hover:scale-105 hover:shadow-lg"
         >
           <img
             src={product.image}
             alt={product.name}
-            className="w-[250px] h-[300px] object-cover rounded-lg shadow-md"
+            className="w-full h-[250px] object-cover rounded-lg shadow-md"
           />
 
           <h2 className="mt-2 text-center text-xl font-semibold text-gray-800">
@@ -55,14 +73,7 @@ const Products = () => {
             {product.description}
           </p>
 
-          {/* Uncomment if you want star ratings */}
-          {/* <Rating
-            initialValue={product.rating}
-            size={25}
-            readonly={true}
-            fillColor="#F59E0B"
-            className="mt-2"
-          /> */}
+          <StarRating rating={product.rating} />
 
           <span className="mt-2 text-lg font-bold text-pink-600">
             Price: Kes <span>{product.price}</span>
