@@ -8,6 +8,8 @@ import Footer from "./components/Footer"
 import Product from "./pages/Product"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import ProductList from "./pages/ProductList"
+import Orders from "./pages/Order"
 
 const Layout = () => {
   return (
@@ -34,6 +36,14 @@ function App() {
           element: <Cart />
         },
         {
+          path: "/login",
+          element: < Login />
+        },
+        {
+          path: "/create-account",
+          element: < Register />
+        },
+        {
           path: "/profile",
           element: <MyAccount />
         },
@@ -42,13 +52,13 @@ function App() {
           element: < Product />
         },
         {
-          path: "/login",
-          element: < Login />
+          path: "/products/:searchterm",
+          element: < ProductList />
         },
         {
-          path: "/create-account",
-          element: < Register />
-        }
+          path: "/myorder",
+          element: <Orders />
+        },
       ]
     }
   ])
