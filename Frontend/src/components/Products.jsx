@@ -57,7 +57,7 @@ const Products = () => {
       {products.map((product) => (
         <div
           key={product.id}
-          className="flex flex-col items-center justify-center h-auto m-3 cursor-pointer transform transition duration-500 hover:scale-105 hover:shadow-lg"
+          className="flex flex-col items-center justify-center h-auto m-5 cursor-pointer transform transition duration-500 hover:scale-105 hover:shadow-lg"
         >
           <img
             src={product.image}

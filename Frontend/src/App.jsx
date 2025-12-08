@@ -6,6 +6,8 @@ import Announcement from "./components/Announcement"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Product from "./pages/Product"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 const Layout = () => {
   return (
@@ -37,7 +39,15 @@ function App() {
         },
         {
           path: "/product/:productId",
-          element: < Product/>
+          element: < Product />
+        },
+        {
+          path: "/login",
+          element: < Login />
+        },
+        {
+          path: "/create-account",
+          element: < Register />
         }
       ]
     }
