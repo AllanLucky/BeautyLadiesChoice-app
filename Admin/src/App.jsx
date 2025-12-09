@@ -3,6 +3,7 @@ import Menu from "./components/Menu"
 import Home from "./pages/Home"
 import Products from "./pages/Products"
 import Users from "./pages/Users"
+import Orders from "./pages/Orders"
 
 const Layout = () => {
   return (
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
         path: "/products",
         element: <Products />,
       },
+      {
+        path: "/orders",
+        element: <Orders />,
+      },
+
 
     ],
   },
