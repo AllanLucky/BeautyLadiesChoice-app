@@ -20,7 +20,7 @@ const Home = () => {
           {/* Products Card */}
           <div className="bg-white h-52 w-52 m-5 shadow-xl flex flex-col rounded-lg items-center">
             <div className="h-32 w-32 m-5 border-[10px] border-red-300 border-solid rounded-full flex items-center justify-center">
-              <h2 className="font-bold text-2xl">699</h2>
+              <h2 className="font-bold text-2xl">200</h2>
             </div>
             <h2 className="font-semibold text-xl">Products</h2>
           </div>
@@ -28,7 +28,7 @@ const Home = () => {
           {/* Users Card */}
           <div className="bg-white h-52 w-52 m-5 shadow-xl flex flex-col rounded-lg items-center">
             <div className="h-32 w-32 m-5 border-[10px] border-gray-400 border-solid rounded-full flex items-center justify-center">
-              <h2 className="font-bold text-2xl">699</h2>
+              <h2 className="font-bold text-2xl">250</h2>
             </div>
             <h2 className="font-semibold text-xl">Users</h2>
           </div>
