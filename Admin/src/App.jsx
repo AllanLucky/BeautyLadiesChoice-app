@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Products from "./pages/Products"
 import Users from "./pages/Users"
 import Orders from "./pages/Orders"
+import Banner from "./pages/Banners"
 
 const Layout = () => {
   return (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders />,
+      },
+      {
+        path: "/banners",
+        element: <Banner />,
       },
 
 
