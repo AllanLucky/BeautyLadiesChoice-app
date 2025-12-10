@@ -41,7 +41,7 @@ const Menu = () => {
         </Link>
 
         <hr className="w-full my-[20px] border-gray-300" />
-        <Link>
+        <Link to="/banners">
           <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
             <FaElementor className="mr-[15px] text-[#ef93db]" />
             Banners
