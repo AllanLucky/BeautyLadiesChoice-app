@@ -6,14 +6,12 @@ const Menu = () => {
     <div className="h-[100vh] bg-gray-50 p-[20px] w-[280px] shadow-lg overflow-y-auto">
       <ul className="flex flex-col items-start justify-start mt-[20px] pl-[20px]">
 
-        <Link to="/">
-          <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
-            <FaHome className="mr-[15px] text-[#ef93db]" />
-            Home
-          </li>
-        </Link>
+        <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
+          <FaHome className="mr-[15px] text-[#ef93db]" />
+          Home
+        </li>
 
-        <Link to="/my-account">
+        <Link to="/profile">
           <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
             <FaUser className="mr-[15px] text-[#ef93db]" />
             Profile
@@ -43,25 +41,23 @@ const Menu = () => {
         </Link>
 
         <hr className="w-full my-[20px] border-gray-300" />
-        <Link to="/banners">
+        <Link>
           <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
             <FaElementor className="mr-[15px] text-[#ef93db]" />
             Banners
           </li>
         </Link>
-        <Link to="/settings">
+        <Link>
           <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
             <FaCog className="mr-[15px] text-[#ef93db]" />
             Settings
           </li>
         </Link>
 
-        <Link to="/back-up">
-          <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
-            <FaHdd className="mr-[15px] text-[#ef93db]" />
-            Back Up
-          </li>
-        </Link>
+        <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-all duration-150 hover:text-[#d01fad] hover:translate-x-1">
+          <FaHdd className="mr-[15px] text-[#ef93db]" />
+          Back Up
+        </li>
 
         <hr className="w-full my-[20px] border-gray-300" />
 
