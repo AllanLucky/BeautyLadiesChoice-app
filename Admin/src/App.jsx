@@ -4,6 +4,10 @@ import Home from "./pages/Home"
 import Products from "./pages/Products"
 import Users from "./pages/Users"
 import Orders from "./pages/Orders"
+import Banners from "./pages/Banners"
+import Settings from "./pages/Settings"
+import BackUp from "./pages/BackUp"
+import MyAccount from "./pages/MyAccount"
 
 const Layout = () => {
   return (
@@ -28,6 +32,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/my-account",
+        element: <MyAccount />,
+      },
+      {
         path: "/users",
         element: <Users />,
       },
@@ -39,6 +47,21 @@ const router = createBrowserRouter([
         path: "/orders",
         element: <Orders />,
       },
+      {
+        path: "/banners",
+        element: <Banners />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
+      },
+      {
+        path: "/back-up",
+        element: <BackUp />,
+      },
+
+
+
 
 
     ],
