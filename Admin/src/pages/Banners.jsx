@@ -2,7 +2,7 @@ import { FaPlus } from "react-icons/fa";
 
 const Banner = () => {
   return (
-    <div className="flex ml-8 w-full">
+    <div className="flex ml-12 w-full">
 
       {/* LEFT BANNERS - 50% width */}
       <div className="w-1/2 pr-4">
