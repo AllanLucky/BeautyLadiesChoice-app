@@ -114,7 +114,9 @@ const Products = () => {
     <div className="p-5 w-[80vw]">
       <div className="flex items-center justify-between m-[30px]">
         <h1 className="m-[20px] text-[20px]">All Products</h1>
-        <button className="bg-green-500 font-semibold text-white cursor-pointer p-[10px] rounded-md">Add Product</button>
+        {/* <Link to="/newproduct">
+          <button className="bg-green-500 font-semibold text-white cursor-pointer p-[10px] rounded-md">Add Product</button>
+        </Link> */}
       </div>
       <div className='m-[30px]'>
         <DataGrid rows={data} checkboxSelection columns={columns} getRowId={(row) => row._id} />
