@@ -5,6 +5,8 @@ import Products from "./pages/Products"
 import Users from "./pages/Users"
 import Orders from "./pages/Orders"
 import Banner from "./pages/Banners"
+import NewProduct from "./pages/NewProduct"
+import Product from "./pages/Product"
 
 const Layout = () => {
   return (
@@ -41,9 +43,20 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
       {
+        path: "/newproduct",
+        element: <NewProduct />,
+      },
+      {
         path: "/banners",
         element: <Banner />,
       },
+
+      {
+        path: "/product",
+        element: <Product />,
+      },
+
+
 
 
     ],
