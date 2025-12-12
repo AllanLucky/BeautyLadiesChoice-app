@@ -37,7 +37,7 @@ const NewProduct = () => {
 
   const handleChange = (e) =>{
    setIputs((prev)=>{
-    return{...prev, [e.target.value]:e.target.value}
+    return{...prev, [e.target.name]:e.target.value}
    })
   }
 
@@ -50,10 +50,11 @@ const NewProduct = () => {
 
     try{
       const uploadRes = await axios.post(
-         "http://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
+         "https://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
         data
       );
-      const {url} = uploadRes.data;
+      
+      const { url } = uploadRes.data;
       setImage(url)
       setUploading("uploaded 100%")
       await userRequest.post("/products",{img:image,...inputs, ...selectedOptions})
@@ -142,7 +143,7 @@ const NewProduct = () => {
             <div>
               <label className="block mb-2 font-semibold">Discounted Price</label>
               <input
-              name="discountedPrice"
+              name="discountPrice"
                 type="number"
                 placeholder="KES 9000"
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
@@ -158,7 +159,7 @@ const NewProduct = () => {
               <label className="block mb-2 font-semibold">Wholesale Price</label>
               <input
                 type="number"
-                name="wholesale Price"
+                name="wholeSalePrice"
                 onChange={handleChange}
                 placeholder="KES 9000"
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
@@ -170,7 +171,7 @@ const NewProduct = () => {
               <label className="block mb-2 font-semibold">Wholesale Minimum Quantity</label>
               <input
                 type="number"
-                name="wholesaleMinimumQuantity"
+                name="wholesaleMinQty"
                 onChange={handleChange}
                 placeholder="Min quantity"
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
@@ -193,7 +194,7 @@ const NewProduct = () => {
             <div>
               <label className="block mb-2 font-semibold">Concern</label>
               <select
-                name="concern"
+                name="concerns"
                 onChange={handleSelectedChange}
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
               >
@@ -215,7 +216,7 @@ const NewProduct = () => {
               {selectedOptions.concern.map((option)=>(
                 <div key={option} className="flex items-center space-x-2">
                   <span>{option}</span>
-                  <FaTrash className="text-red-500 cursor-pointer" onClick={()=>handleTRemoveOption("concern", option)}/>
+                  <FaTrash className="text-red-500 cursor-pointer" onClick={()=>handleTRemoveOption("concerns", option)}/>
                 </div>
               ))}
             </div>
