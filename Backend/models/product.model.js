@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   },
   desc: {
     type: String,
-    required: true,
+    // required: true,
   },
   whatinbox: {
     type: String,
