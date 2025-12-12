@@ -1,29 +1,24 @@
 import User from "../models/user.model.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
-import e from "express";
 
 // REGISTER USER
 // POST /api/v1/auth/register
 // PUBLIC
-// @aACCESS  PUBLIC
-
-
+// @access PUBLIC
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   // Check if user already exists
-  const usewrExists = await User.findOne({ email });
+  const userExists = await User.findOne({ email });
 
-  // If user exists, throw an error
-  if (usewrExists) {
+  if (userExists) {
     res.status(400);
     throw new Error("User already exists");
   }
-  // Create new user
+
   const user = await User.create({ name, email, password });
 
-  // If user creation is successful, generate token and send response
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
@@ -40,13 +35,11 @@ const registerUser = asyncHandler(async (req, res) => {
 // LOGIN USER
 // POST /api/v1/auth/login
 // PUBLIC
-// @aACCESS  PUBLIC
-
+// @access PUBLIC
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  // Check if user exists and password matches 
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
     res.status(200).json({
@@ -63,8 +56,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // LOGOUT USER
 // POST /api/v1/auth/logout
 // PRIVATE
-// @aACCESS  PRIVATE
-
+// @access PRIVATE
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
