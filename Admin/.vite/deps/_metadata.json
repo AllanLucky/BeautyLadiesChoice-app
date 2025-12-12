@@ -1,8 +1,46 @@
 {
-  "hash": "37561588",
+  "hash": "6d0c3c09",
   "configHash": "da77d8dc",
-  "lockfileHash": "298ecf2e",
-  "browserHash": "f50ec323",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "89a1d6e4",
+  "browserHash": "122a4ace",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "27e8442d",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "bb3fc90d",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "9867b3ad",
+      "needsInterop": false
+    },
+    "react-icons/fa": {
+      "src": "../../node_modules/react-icons/fa/index.mjs",
+      "file": "react-icons_fa.js",
+      "fileHash": "5e703863",
+      "needsInterop": false
+    },
+    "@mui/x-charts/LineChart": {
+      "src": "../../node_modules/@mui/x-charts/esm/LineChart/index.js",
+      "file": "@mui_x-charts_LineChart.js",
+      "fileHash": "80d5c616",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-SA72QV4G": {
+      "file": "chunk-SA72QV4G.js"
+    },
+    "chunk-C7CLCYJX": {
+      "file": "chunk-C7CLCYJX.js"
+    }
+  }
 }
