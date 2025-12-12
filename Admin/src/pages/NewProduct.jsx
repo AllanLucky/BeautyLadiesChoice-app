@@ -1,7 +1,50 @@
-import React from "react";
+import axios from "axios"
+import { userRequest } from "../RequestMethed";
 import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
 
 const NewProduct = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [inputs, setIputs] = useState({});
+  const [image, setImage] = useState("");
+  const [upload, setUpload] = useState("Uploading is 0%");
+  const [selectedOption, setSelectedOption] = useState({
+    concern: [],
+    skinType: [],
+    categories: []
+  });
+
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
+
+  const handleSelectedChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedOption((prev) => ({
+      ...prev,
+      [name]: [...prev[name], value]
+    }));
+  };
+
+  const handleTRemoveOption = (name, value) => {
+    setSelectedOption((prev) => ({
+      ...prev,
+      [name]: prev[name].filter((option) => option !== value)
+    }));
+  };
+
+  const handleIputChange = (e) =>{
+   setIputs((prev)=>{
+    return{...prev, [e.target.value]:e.target.value}
+   })
+  }
+
+  const handlleUpload = async (e) =>{
+    e.preventDefault();
+  }
+
   return (
     <div className="p-6 bg-gray-100 w-[75vw] mx-8">
 
@@ -20,12 +63,24 @@ const NewProduct = () => {
           <div className="space-y-6">
             {/* Product Image */}
             <div className="flex flex-col items-center">
-              <label className="font-semibold mb-3">Product Image</label>
-              <div className="border-2 border-gray-400 h-[250px] w-[250px] rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-100 transition">
+              <label htmlFor="file" className="font-semibold mb-3">Product Image</label>
+              {!selectedImage ? (
+                <div className="border-2 border-gray-400 h-[250px] w-[250px] rounded-lg flex items-center   justify-center cursor-pointer hover:bg-gray-100 transition">
                 <FaPlus className="text-4xl text-gray-600" />
               </div>
+              ):(
+                <img src={URL.createObjectURL(selectedImage)} alt="Product"
+                className="h-[100px] w-[100px]"
+                
+                 />
+              )}
+              <input 
+              type="file"
+              id="file"
+              onChange={imageChange}
+              style={{ display:"none" }}
+              />
             </div>
-
             {/* Product Name */}
             <div>
               <label className="block mb-2 font-semibold">Product Name</label>
@@ -103,7 +158,11 @@ const NewProduct = () => {
             {/* Concern */}
             <div>
               <label className="block mb-2 font-semibold">Concern</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400">
+              <select
+                name="concern"
+                onChange={handleSelectedChange}
+                className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
+              >
                 <option value="">Select Concern</option>
                 <option value="acne">Acne & Blemishes</option>
                 <option value="hyperpigmentation">Dark Spots</option>
@@ -121,25 +180,33 @@ const NewProduct = () => {
             {/* Skin Type */}
             <div>
               <label className="block mb-2 font-semibold">Select Skin Type</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400">
+              <select
+                name="skinType"
+                onChange={handleSelectedChange}
+                className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
+              >
                 <option>Select Skin Type</option>
-                <option>All</option>
-                <option>Oily</option>
-                <option>Dry</option>
-                <option>Sensitive</option>
-                <option>Normal</option>
+                <option value="all">All</option>
+                <option value="oily">Oily</option>
+                <option value="dry">Dry</option>
+                <option value="sensitive">Sensitive</option>
+                <option value="normal">Normal</option>
               </select>
             </div>
 
             {/* Category */}
             <div>
               <label className="block mb-2 font-semibold">Category</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400">
+              <select
+                name="categories"
+                onChange={handleSelectedChange}
+                className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
+              >
                 <option>Select Category</option>
-                <option>Foundation</option>
-                <option>Serum</option>
-                <option>Toner</option>
-                <option>Lotion</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Serum">Serum</option>
+                <option value="Toner">Toner</option>
+                <option value="Lotion">Lotion</option>
               </select>
             </div>
 
