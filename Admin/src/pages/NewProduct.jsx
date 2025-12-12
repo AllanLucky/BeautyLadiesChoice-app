@@ -50,7 +50,7 @@ const NewProduct = () => {
 
     try{
       const uploadRes = await axios.post(
-         "https://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
+         "http://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
         data
       );
       const {url} = uploadRes.data;
@@ -101,7 +101,7 @@ const NewProduct = () => {
               style={{ display:"none" }}
               />
             </div>
-            <span className="text-green-500 mt-2 text-2xl">Loading</span>
+            <span className="text-green-500 mt-2 text-2xl">{uploading}</span>
             {/* Product Name */}
             <div>
               <label className="block mb-2 font-semibold">Product Name</label>
