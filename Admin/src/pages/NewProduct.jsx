@@ -1,15 +1,15 @@
-import axios from "axios"
+import axios from "axios";
 import { userRequest } from "../RequestMethed";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
 const NewProduct = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [inputs, setIputs] = useState({});
+  const [inputs, setInputs] = useState({});
   const [image, setImage] = useState("");
   const [uploading, setUploading] = useState("Uploading is 0%");
   const [selectedOptions, setSelectedOption] = useState({
-    concern: [],
+    concerns: [],
     skinType: [],
     categories: []
   });
@@ -35,40 +35,43 @@ const NewProduct = () => {
     }));
   };
 
-  const handleChange = (e) =>{
-   setIputs((prev)=>{
-    return{...prev, [e.target.name]:e.target.value}
-   })
-  }
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  const handlleUpload = async (e) =>{
+  const handleUpload = async (e) => {
     e.preventDefault();
-    const data = new FormData
+    if (!selectedImage) {
+      alert("Please select an image");
+      return;
+    }
+
+    const data = new FormData();
     data.append("file", selectedImage);
     data.append("upload_preset", "uploads");
-    setUploading("Uploading...")
+    setUploading("Uploading...");
 
-    try{
+    try {
       const uploadRes = await axios.post(
-         "https://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
+        "https://api.cloudinary.com/v1_1/dkdx7xytz/image/upload",
         data
       );
-      
+
       const { url } = uploadRes.data;
-      setImage(url)
-      setUploading("uploaded 100%")
-      await userRequest.post("/products",{img:image,...inputs, ...selectedOptions})
+      setImage(url);
+      setUploading("Uploaded 100%");
 
-    }catch(error){
+      // Use url directly
+      await userRequest.post("/products", { img: url, ...inputs, ...selectedOptions });
+      alert("Product created successfully ✅");
+    } catch (error) {
       console.log(error);
-      setUploading("Uploading failed")
-
+      setUploading("Uploading failed ❌");
     }
-  }
+  };
 
   return (
     <div className="p-6 bg-gray-100 w-[75vw] mx-8">
-
       {/* Page Title */}
       <div className="flex items-center justify-center mb-8">
         <h1 className="text-3xl font-bold">New Product</h1>
@@ -76,39 +79,43 @@ const NewProduct = () => {
 
       {/* Main Card */}
       <div className="bg-white p-8 shadow-xl rounded-xl w-full max-w-[1600px] mx-auto">
-
         {/* Form */}
         <form className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
-
           {/* LEFT SIDE */}
           <div className="space-y-6">
             {/* Product Image */}
             <div className="flex flex-col items-center">
               <label className="font-semibold mb-3">Product Image</label>
               {!selectedImage ? (
-                <label htmlFor="file" className="border-2 border-gray-400 h-[250px] w-[250px] rounded-lg flex items-center   justify-center cursor-pointer hover:bg-gray-100 transition">
-                <FaPlus className="text-4xl text-gray-600" />
-              </label>
-              ):(
-                <img src={URL.createObjectURL(selectedImage)} alt="Product"
-                className="h-[100px] w-[100px]"
-                
-                 />
+                <label
+                  htmlFor="file"
+                  className="border-2 border-gray-400 h-[250px] w-[250px] rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-100 transition"
+                >
+                  <FaPlus className="text-4xl text-gray-600" />
+                </label>
+              ) : (
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Product"
+                  className="h-[100px] w-[100px]"
+                />
               )}
-              <input 
-              type="file"
-              id="file"
-              onChange={imageChange}
-              style={{ display:"none" }}
+              <input
+                type="file"
+                id="file"
+                onChange={imageChange}
+                style={{ display: "none" }}
               />
             </div>
+
             <span className="text-green-500 mt-2 text-2xl">{uploading}</span>
+
             {/* Product Name */}
             <div>
               <label className="block mb-2 font-semibold">Product Name</label>
               <input
                 type="text"
-                title="name"
+                name="name"
                 placeholder="Product Name"
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
@@ -143,9 +150,10 @@ const NewProduct = () => {
             <div>
               <label className="block mb-2 font-semibold">Discounted Price</label>
               <input
-              name="discountPrice"
+                name="discountPrice"
                 type="number"
                 placeholder="KES 9000"
+                onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-gray-400"
               />
             </div>
@@ -153,7 +161,6 @@ const NewProduct = () => {
 
           {/* RIGHT SIDE */}
           <div className="space-y-6">
-
             {/* Wholesale Price */}
             <div>
               <label className="block mb-2 font-semibold">Wholesale Price</label>
@@ -213,10 +220,13 @@ const NewProduct = () => {
             </div>
 
             <div className="mt-2">
-              {selectedOptions.concern.map((option)=>(
+              {selectedOptions.concerns.map((option) => (
                 <div key={option} className="flex items-center space-x-2">
                   <span>{option}</span>
-                  <FaTrash className="text-red-500 cursor-pointer" onClick={()=>handleTRemoveOption("concerns", option)}/>
+                  <FaTrash
+                    className="text-red-500 cursor-pointer"
+                    onClick={() => handleTRemoveOption("concerns", option)}
+                  />
                 </div>
               ))}
             </div>
@@ -237,13 +247,16 @@ const NewProduct = () => {
                 <option value="normal">Normal</option>
               </select>
               <div className="mt-2">
-              {selectedOptions.skinType.map((option)=>(
-                <div key={option} className="flex items-center space-x-2">
-                  <span>{option}</span>
-                  <FaTrash className="text-red-500 cursor-pointer" onClick={()=>handleTRemoveOption("skinType", option)}/>
-                </div>
-              ))}
-            </div>
+                {selectedOptions.skinType.map((option) => (
+                  <div key={option} className="flex items-center space-x-2">
+                    <span>{option}</span>
+                    <FaTrash
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => handleTRemoveOption("skinType", option)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Category */}
@@ -261,20 +274,25 @@ const NewProduct = () => {
                 <option value="Lotion">Lotion</option>
               </select>
               <div className="mt-2">
-              {selectedOptions.categories.map((option)=>(
-                <div key={option} className="flex items-center space-x-2">
-                  <span>{option}</span>
-                  <FaTrash className="text-red-500 cursor-pointer" onClick={()=>handleTRemoveOption("categories", option)}/>
-                </div>
-              ))}
-            </div>
+                {selectedOptions.categories.map((option) => (
+                  <div key={option} className="flex items-center space-x-2">
+                    <span>{option}</span>
+                    <FaTrash
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => handleTRemoveOption("categories", option)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Submit Button */}
-            <button className="bg-gray-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-black transition mt-5" onClick={handlleUpload}>
+            <button
+              className="bg-gray-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-black transition mt-5"
+              onClick={handleUpload}
+            >
               Create Product
             </button>
-
           </div>
         </form>
       </div>
